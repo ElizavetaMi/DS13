@@ -72,4 +72,51 @@ public class AviaSoulsTest {
         assertArrayEquals(expectedTickets, tickets);
     }
 
+
+    @Test
+    public void testSearchMultipleTicketsFound() {
+        AviaSouls souls = new AviaSouls();
+        Ticket ticket1 = new Ticket("MOW", "LED", 5000, 10, 12);
+        Ticket ticket2 = new Ticket("MOW", "LED", 3000, 9, 11);
+        Ticket ticket3 = new Ticket("MOW", "LED", 4000, 8, 10);
+        souls.add(ticket1);
+        souls.add(ticket2);
+        souls.add(ticket3);
+
+        Ticket[] expected = {ticket2, ticket3, ticket1};
+        Ticket[] actual = souls.search("MOW", "LED");
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testSearchSingleTicketFound() {
+        AviaSouls souls = new AviaSouls();
+        Ticket ticket1 = new Ticket("MOW", "LED", 5000, 10, 12);
+        Ticket ticket2 = new Ticket("NYC", "LAX", 6000, 14, 18);
+        souls.add(ticket1);
+        souls.add(ticket2);
+
+        Ticket[] expected = {ticket1};
+        Ticket[] actual = souls.search("MOW", "LED");
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testSearchNoTicketsFound() {
+        AviaSouls souls = new AviaSouls();
+        Ticket ticket1 = new Ticket("CityA", "CityB", 5000, 10, 12);
+        Ticket ticket2 = new Ticket("CityC", "CityD", 6000, 14, 18);
+        souls.add(ticket1);
+        souls.add(ticket2);
+
+        Ticket[] expected = {};
+        Ticket[] actual = souls.search("CityX", "CityY");
+
+        assertArrayEquals(expected, actual);
+    }
+
 }
+
+
