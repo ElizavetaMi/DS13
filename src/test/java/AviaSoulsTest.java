@@ -92,16 +92,17 @@ public class AviaSoulsTest {
     @Test
     public void testSearchSingleTicketFound() {
         AviaSouls souls = new AviaSouls();
-        Ticket ticket1 = new Ticket("MOW", "LED", 5000, 10, 12);
-        Ticket ticket2 = new Ticket("NYC", "LAX", 6000, 14, 18);
+        Ticket ticket1 = new Ticket("A", "B", 5000, 10, 12);
+        Ticket ticket2 = new Ticket("C", "D", 6000, 14, 18);
         souls.add(ticket1);
         souls.add(ticket2);
 
         Ticket[] expected = {ticket1};
-        Ticket[] actual = souls.search("MOW", "LED");
+        Ticket[] actual = souls.search("A", "B");
 
         assertArrayEquals(expected, actual);
     }
+
 
     @Test
     public void testSearchNoTicketsFound() {
